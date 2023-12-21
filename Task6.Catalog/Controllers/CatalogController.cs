@@ -3,25 +3,33 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Task6.Catalog.Models;
+using Task6.Catalog.Services;
 
 namespace Task6.Catalog.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ValuesController : ControllerBase
+    public class CatalogController : ControllerBase
     {
-        // GET api/values
-        [HttpGet]
-        public ActionResult<IEnumerable<string>> Get()
+        ICatalogService _catalogSrv;
+
+        public CatalogController(ICatalogService srv)
         {
-            return new string[] { "value1", "value2" };
+            _catalogSrv = srv;
+        }
+        // GET api/catalog
+        [HttpGet]
+        public ActionResult<IEnumerable<CatalogItem>> Get()
+        {
+            return _catalogSrv.GetItems().ToList();
         }
 
-        // GET api/values/5
+        // GET api/catalog/5
         [HttpGet("{id}")]
-        public ActionResult<string> Get(int id)
+        public ActionResult<CatalogItem> Get(int id)
         {
-            return "value";
+            return _catalogSrv.GetItem(id);
         }
 
         // POST api/values

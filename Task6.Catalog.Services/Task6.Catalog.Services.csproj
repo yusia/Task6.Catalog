@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Task6.Catalog.Data\Task6.Catalog.Data.csproj" />
+    <ProjectReference Include="..\Task6.Catalog.Interfaces\Task6.Catalog.Models.csproj" />
+  </ItemGroup>
+
+</Project>

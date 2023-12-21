@@ -10,6 +10,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Task6.Catalog.Data;
+using Task6.Catalog.Services;
 
 namespace Task6.Catalog
 {
@@ -26,7 +28,9 @@ namespace Task6.Catalog
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-          
+
+            services.AddScoped<ICatalogService, CatalogService>();
+            services.AddScoped<ICatalogRepository, CatalogRepository>();
             services.AddSwaggerGen();
         }
 
