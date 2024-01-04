@@ -8,7 +8,7 @@ namespace Task6.Catalog.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ValuesController : ControllerBase
+    public class CategoryController : ControllerBase
     {
         // GET api/values
         [HttpGet]
@@ -16,6 +16,10 @@ namespace Task6.Catalog.Api.Controllers
         {
             return new string[] { "value1", "value2" };
         }
+        /* List of categories
+Add category
+Update category
+Delete category*/
 
         // GET api/values/5
         [HttpGet("{id}")]

@@ -25,29 +25,37 @@ namespace Task6.Catalog.Api.Controllers
             return _catalogSrv.GetItems().ToList();
         }
 
-        // GET api/catalog/5
-        [HttpGet("{id}")]
+        [HttpGet]
+        [Route("api/[controller]")]
         public ActionResult<CatalogItem> Get(int id)
         {
             return _catalogSrv.GetItem(id);
         }
 
-        // POST api/values
+        [HttpGet("api/catalog/category/{id}")]
+        public ActionResult<IEnumerable<CatalogItem>> GetByCategory(int id)
+        {
+            return _catalogSrv.GetItemsByCategory(id).ToList();
+        }
+
         [HttpPost]
-        public void Post([FromBody] string value)
+        public void Post([FromBody] CatalogItem item)
         {
+            //todo set category
+            _catalogSrv.AddItem(item);
+
         }
 
-        // PUT api/values/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public void Put([FromBody] CatalogItem  item)
         {
+            _catalogSrv.UpdateItem(item);
         }
 
-        // DELETE api/values/5
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
+            _catalogSrv.DeleteItem(id);
         }
     }
 }

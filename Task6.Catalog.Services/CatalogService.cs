@@ -20,5 +20,23 @@ namespace Task6.Catalog.Services
         {
             return _catalogRepo.GetItems();
         }
+
+        public IEnumerable<CatalogItem> GetItemsByCategory(int categoryId)
+        {
+            return _catalogRepo.GetItemsByCategory(categoryId);
+        }
+        public void AddItem(CatalogItem item)
+        {
+            _catalogRepo.AddItem(item);
+        }
+        public void DeleteItem(int id)
+        {
+            _catalogRepo.DeleteItem(id);
+
+        }
+        public void UpdateItem(CatalogItem item)
+        {
+            _catalogRepo.UpdateItem(item);
+        }
     }
 }

@@ -8,5 +8,9 @@ namespace Task6.Catalog.Data
     {
         CatalogItem GetItem(int id);
         IEnumerable<CatalogItem> GetItems();
+        IEnumerable<CatalogItem> GetItemsByCategory(int categoryId);
+         void AddItem(CatalogItem item);
+        void UpdateItem(CatalogItem item);
+        void DeleteItem(int id);
     }
 }
