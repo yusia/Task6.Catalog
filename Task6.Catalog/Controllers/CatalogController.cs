@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Task6.Catalog.Models;
+using Task6.Catalog.Models.Exceptions;
 using Task6.Catalog.Services;
 
 namespace Task6.Catalog.Api.Controllers
@@ -39,23 +40,40 @@ namespace Task6.Catalog.Api.Controllers
         }
 
         [HttpPost]
-        public void Post([FromBody] CatalogItem item)
+        public ActionResult Post([FromBody] CatalogItem item)
         {
             //todo set category
             _catalogSrv.AddItem(item);
+            return Ok();
 
         }
 
         [HttpPut("{id}")]
-        public void Put([FromBody] CatalogItem  item)
+        public ActionResult Put([FromBody] CatalogItem  item)
         {
-            _catalogSrv.UpdateItem(item);
+            try
+            {
+                _catalogSrv.UpdateItem(item);
+                return Ok();
+            }
+            catch (ItemNotFoundException ex)
+            {
+                return NotFound();
+            }
         }
 
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public ActionResult Delete(int id)
         {
-            _catalogSrv.DeleteItem(id);
+            try
+            {
+                _catalogSrv.DeleteItem(id);
+                return Ok();
+            }
+            catch (ItemNotFoundException ex)
+            {
+                return NotFound();
+            }
         }
     }
 }

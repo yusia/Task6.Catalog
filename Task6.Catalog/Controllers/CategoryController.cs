@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Task6.Catalog.Models;
+using Task6.Catalog.Models.Exceptions;
 using Task6.Catalog.Services;
 
 namespace Task6.Catalog.Api.Controllers
@@ -36,21 +37,39 @@ Delete category*/
         }
 
         [HttpPost]
-        public void Post([FromBody] Category Category)
+        public ActionResult Post([FromBody] Category Category)
         {
             _categorySrv.AddCategory(Category);
+            return Ok();
         }
 
         [HttpPut("{id}")]
-        public void Put([FromBody] Category Category)
+        public ActionResult Put([FromBody] Category Category)
         {
-            _categorySrv.UpdateCategory(Category);
+            try
+            {
+                _categorySrv.UpdateCategory(Category);
+
+                return Ok();
+            }
+            catch (ItemNotFoundException ex)
+            {
+                return NotFound();
+            }
         }
 
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public ActionResult Delete(int id)
         {
-            _categorySrv.DeleteCategory(id);
+            try
+            {
+                _categorySrv.DeleteCategory(id);
+                return Ok();
+            }
+            catch (ItemNotFoundException ex)
+            {
+                return NotFound();
+            }
         }
     }
 }

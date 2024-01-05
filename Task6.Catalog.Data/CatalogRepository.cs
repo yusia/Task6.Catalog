@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Task6.Catalog.Models;
+using Task6.Catalog.Models.Exceptions;
 
 namespace Task6.Catalog.Data
 {
@@ -37,7 +38,11 @@ namespace Task6.Catalog.Data
         public void DeleteItem(int id)
         {
             var item = GetItem(id);
-            data.Remove(item);
+            if (item != null)
+            {
+                data.Remove(item);
+            }
+            else throw new ItemNotFoundException();
         }
 
         public void UpdateItem(CatalogItem item)
@@ -48,6 +53,7 @@ namespace Task6.Catalog.Data
                 itemToUpdate.Name = item.Name;
                 itemToUpdate.Price = item.Price;
             }
+            else throw new ItemNotFoundException();
         }
     }
 }
