@@ -3,6 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Task6.Catalog.Models;
+using Task6.Catalog.Services;
 
 namespace Task6.Catalog.Api.Controllers
 {
@@ -10,40 +12,45 @@ namespace Task6.Catalog.Api.Controllers
     [ApiController]
     public class CategoryController : ControllerBase
     {
-        // GET api/values
-        [HttpGet]
-        public ActionResult<IEnumerable<string>> Get()
+        ICategoryService _categorySrv;
+
+        public CategoryController(ICategoryService srv)
         {
-            return new string[] { "value1", "value2" };
+            _categorySrv = srv;
+        }
+
+        [HttpGet]
+        public ActionResult<IEnumerable<Category>> Get()
+        {
+            return _categorySrv.GetCategories().ToList();
         }
         /* List of categories
 Add category
 Update category
 Delete category*/
 
-        // GET api/values/5
         [HttpGet("{id}")]
-        public ActionResult<string> Get(int id)
+        public ActionResult<Category> Get(int id)
         {
-            return "value";
+            return _categorySrv.GetCategory(id);
         }
 
-        // POST api/values
         [HttpPost]
-        public void Post([FromBody] string value)
+        public void Post([FromBody] Category Category)
         {
+            _categorySrv.AddCategory(Category);
         }
 
-        // PUT api/values/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public void Put([FromBody] Category Category)
         {
+            _categorySrv.UpdateCategory(Category);
         }
 
-        // DELETE api/values/5
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
+            _categorySrv.DeleteCategory(id);
         }
     }
 }

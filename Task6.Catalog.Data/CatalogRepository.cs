@@ -6,18 +6,14 @@ namespace Task6.Catalog.Data
 {
     public class CatalogRepository : ICatalogRepository
     {
-        List<Category> dataCategory = new List<Category>{
-                new Category() { Id = 0, Type = "Techno" },
-                new Category() { Id = 1, Type = "Dishes"} };
         List<CatalogItem> data;
 
-        public CatalogRepository()
+        public CatalogRepository(ICategoryRepository categRepo )
         {
           data = new List<CatalogItem>{
-                new CatalogItem() { Id = 0, Name = "Cup", Price = 100  , CategoryType = dataCategory[0]},
-                new CatalogItem() { Id = 1, Name = "Kettle", Price = 300  , CategoryType = dataCategory[1]},
-                new CatalogItem() { Id = 2, Name = "Plate", Price = 150 , CategoryType = dataCategory[0] },};
-
+                new CatalogItem() { Id = 0, Name = "Cup", Price = 100  , CategoryType = categRepo.GetCategory(0)},
+                new CatalogItem() { Id = 1, Name = "Kettle", Price = 300  , CategoryType = categRepo.GetCategory(1)},
+                new CatalogItem() { Id = 2, Name = "Plate", Price = 150 , CategoryType = categRepo.GetCategory(0) },};
 
         }
 

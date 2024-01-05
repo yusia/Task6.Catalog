@@ -30,7 +30,9 @@ namespace Task6.Catalog
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
             services.AddScoped<ICatalogService, CatalogService>();
+            services.AddScoped<ICategoryService, CategoryService>();
             services.AddSingleton<ICatalogRepository, CatalogRepository>();
+            services.AddSingleton<ICategoryRepository, CategoryRepository>();
             services.AddSwaggerGen();
         }
 
